@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Magic</title>
+    </head>
+    <body>
+        <ul id="list">
+            <script type="text/magic" id="list-item-template">
+            {% for(var i = 0;i < data.length;i++){ %}
+                <li>{$data[i].name$}</li>
+            {% } %}
+            </script>
+        </ul>
+        <script src="../src/magic.js"></script>
+        <script src="test.js"></script>
+    </body>
+</html>

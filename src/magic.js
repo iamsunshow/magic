@@ -1,15 +1,14 @@
 (function(window){
     var Magic = function(id){
-            
-        var dom;
-
+        // check id
         if(!id) return;
 
-        dom = document.getElementById(id);
+        var dom = document.getElementById(id);
 
+        // check dom
         if(!dom) return;
 
-        this.__template = document.getElementById('id').innerHTML;
+        this.__template = dom.innerHTML;
     }; 
 
     Magic.prototype = {
@@ -66,3 +65,10 @@
         return new Magic(id);
     };
 })(window);
+
+// support amd
+if (typeof define === 'function' && define.amd){
+    define('magic', [], function(){
+		return Magic;
+	});
+}

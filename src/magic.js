@@ -20,14 +20,11 @@
 
             if(!template || template == '') return '';
 
-            // parse html
-            template = template.replace(/(<.+>)/g,'__template += \'$1\';');
-            // parse special html,for {$variable1$}-{$variable2$}
-            template = template.replace(/\$}([^{\$]){\$/g,'$}__template += \'$1\';{$');
-            // parse syntax
-            template = template.replace(/{%(.+)%}/g,'$1');
+            // parse line and combine "__template+="
+            template = template.replace(/(.+)\n/g,'__template+=\'$1\';\n');
+            // process boundary sign, for __template+={for var i=0;i<10;i++}
+            template = template.replace(/__template\+=\'\s*{%(.+)%}\s*\'\;/g,'$1');
             // parse varible
-            // TODO:<span></span>{$variable$} parse error
             template = template.replace(/{\$([^\$}]+)\$}/g,'\';\n__template += $1;\n__template += \'');
 
             template = '' + 
@@ -41,24 +38,6 @@
 
             return templator(data);
         }
-        /*
-         * only support render data
-        render:function(templateId, data){
-            var template = $('#' + templateId).html(),
-                html;
-
-            (function(record){
-                html = template.replace(/\${[a-zA-z0-9\$\.\[\]\_]+}/g, function(result){
-                    var origin = /\${([a-zA-Z0-9\$\.\[\]\_]+)}/g.exec(result),
-                        value = eval("record." + origin[1]);
-
-                    return value !== undefined && value !== null ? value : '';
-                });
-            })(data);
-
-            return html;
-        }   
-        */
     };
 
     window.Magic = function(id){

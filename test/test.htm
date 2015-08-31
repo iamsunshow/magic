@@ -5,13 +5,20 @@
         <title>Magic</title>
     </head>
     <body>
-        <ul id="list">
-            <script type="text/magic" id="list-item-template">
-            {% for(var i = 0;i < data.length;i++){ %}
-                <li>{$data[i].name$}</li>
-            {% } %}
-            </script>
-        </ul>
+        <div id="_container"></div>
+        <script type="text/magic" id="_template">
+        <span></span>test case 1
+        test case 2<span></span>
+        <span>{$name$}test case 3{$address$}</span>
+        <span></span>{$name$}
+        {$name$}<span></span>
+        <p>名称：{$name$}
+        地址：{$address$}
+        电话：{$tel$}</p>
+        {%for(var i = 0;i < 10;i++){%}
+            <span>{$i + '' + name$}</span>
+        {%}%}
+        </script>
         <script src="../src/magic.js"></script>
         <script src="test.js"></script>
     </body>
